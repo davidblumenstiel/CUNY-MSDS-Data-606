@@ -1,0 +1,90 @@
+---
+title: "Data 606 Project Proposal"
+author: "David Blumenstiel"
+date: "3/28/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+### Data Preparation
+
+```{r setup, echo=TRUE, results='hide', warning=FALSE, message=FALSE}
+#Loading the dataframe
+df <- read.csv('https://raw.githubusercontent.com/davidblumenstiel/data/master/kaglemovies/tmdb_5000_movies.csv')
+
+#Trimming out the parts variables we aren't interested in
+movies <- df[,c(1,9,13,14,19)]
+
+#Taking out observations which have a budget under 1000 (gets rid of some suspect observations)
+movies <- movies[movies$budget > 1000,]
+
+```
+
+
+### Research question 
+
+I want to determine what relationship the budget, popularity, runtime, and average rating of a movie have on it's revenue
+
+
+### Cases 
+
+The cases are individual movies that were previously releasesd (last updated September 2017) which had a budget over $1000; there are 3734 cases.
+
+
+### Data collection 
+
+The authors of the dataset collected the data from https://www.themoviedb.org using their API.  I obtained the dataset from https://www.kaggle.com/tmdb/tmdb-movie-metadata/discussion.  I also cleaned it a bit by taking out the variables that I will not be looking at, and observations with budgets under $1000 to reduce what I think may be unrealistic observations.
+
+
+### Type of study 
+
+This is an observational study.
+
+
+### Data Source 
+
+Data was collected by The Movie Database (TMDb) https://www.themoviedb.org, and presented on Kagle https://www.kaggle.com/tmdb/tmdb-movie-metadata.
+
+
+
+### Dependent Variable
+
+The responce variable is revenue, and it is numerical
+
+
+
+### Independent Variable
+
+The explanatory variables are budget, popularity, runtime, and average rating.
+
+
+### Relevant summary statistics 
+
+```{r}
+#Revenue
+summary(movies$revenue)
+hist(movies$revenue)
+
+
+#Budget
+summary(movies$budget)
+hist(movies$budget)
+
+
+#Popularity
+summary(movies$popularity)
+hist(movies$popularity)
+
+
+#Runtime
+summary(movies$runtime)
+hist(movies$runtime)
+
+
+#Average Rating
+summary(movies$vote_average)
+hist(movies$vote_average)
+
+
+```
